@@ -175,7 +175,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 height: 0.5,
               ),
               Container(
-                margin: EdgeInsets.only(top: 10,left: 5,right: 5),
+                margin: EdgeInsets.only(top: 10,left: 5,right: 5,bottom: 20),
                 child: CachedNetworkImage(
                   imageUrl: widget.arguments.photo.image,
                   width: Sizes.width(context),
