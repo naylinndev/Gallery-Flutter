@@ -68,7 +68,7 @@ class _PhotoByCategoryScreenState extends State<PhotoByCategoryScreen> {
           systemOverlayStyle:
           const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
           title: Text(
-            "${widget.arguments.category.categoryName}'s Photo",
+            widget.arguments.category.categoryName,
             style: const TextStyle(color: Colors.white),
           ),
         ),

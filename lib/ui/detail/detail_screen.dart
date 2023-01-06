@@ -38,7 +38,7 @@ class _DetailScreenState extends State<DetailScreen> {
           systemOverlayStyle:
               const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
           title: Text(
-            widget.arguments.photo.title,
+            "${widget.arguments.photo.title}'s Photo",
             style: const TextStyle(color: Colors.white),
           ),
         ),
