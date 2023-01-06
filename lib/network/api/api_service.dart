@@ -11,7 +11,6 @@ part 'api_service.g.dart';
 abstract class ApiService {
   factory ApiService(Dio dio, {String baseUrl}) = _ApiService;
 
-
   @POST('/api/v1/get-photos')
   @FormUrlEncoded()
   Future<HttpResponse<ResultPhoto>> getPhotos(
@@ -24,10 +23,10 @@ abstract class ApiService {
       {@Field('app_secret') required String appSecret,
       @Field('page') required int page});
 
-  @POST('/api/v/get-photos-by-category')
+  @POST('/api/v1/get-photos-by-category')
   @FormUrlEncoded()
   Future<HttpResponse<ResultPhoto>> getPhotosByCategory(
       {@Field('app_secret') required String appSecret,
-        @Field('category_id') required int categoryId,
-        @Field('page') required int page});
+      @Field('category_id') required int categoryId,
+      @Field('page') required int page});
 }

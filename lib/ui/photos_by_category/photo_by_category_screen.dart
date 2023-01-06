@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gallery/bloc/get_photos/bloc.dart';
+import 'package:gallery/bloc/get_photos_by_category/bloc.dart';
 import 'package:gallery/network/model/photo.dart';
 import 'package:gallery/widget/card/card_photo.dart';
 
@@ -17,25 +17,27 @@ import '../../widget/error/error_widget.dart';
 import '../../widget/error/no_data_widget.dart';
 import '../../widget/error/no_internet_widget.dart';
 import '../../ui/detail/detail_screen.dart';
+import '../../common/styles/color_palettes.dart';
 
-class PhotoScreen extends StatefulWidget {
+class PhotoByCategoryScreen extends StatefulWidget {
   static const routeName = '/photo';
+  CategoryDetailArgument arguments;
 
-  const PhotoScreen({Key? key}) : super(key: key);
+  PhotoByCategoryScreen({Key? key,required this.arguments}) : super(key: key);
 
   @override
-  _PhotoScreenState createState() => _PhotoScreenState();
+  _PhotoByCategoryScreenState createState() => _PhotoByCategoryScreenState();
 }
 
-class _PhotoScreenState extends State<PhotoScreen> {
+class _PhotoByCategoryScreenState extends State<PhotoByCategoryScreen> {
   int page = 1;
   bool hasMorePage = false;
   late List<Photo> lists = [];
   late Completer<void> _refreshCompleter = Completer();
   late ScrollController scrollController;
 
-  _getPhotos(BuildContext context) {
-    context.read<GetPhotosBloc>().add(GetPhotos(page: page));
+  _getPhotosByCategory(BuildContext context) {
+    context.read<GetPhotosByCategoryBloc>().add(GetPhotosByCategory(page: page,categoryId: widget.arguments.category.id));
   }
 
   Future<void> _refresh() {
@@ -43,7 +45,7 @@ class _PhotoScreenState extends State<PhotoScreen> {
       page = 1;
       lists.clear();
     });
-    _getPhotos(context);
+    _getPhotosByCategory(context);
     return _refreshCompleter.future;
   }
 
@@ -53,7 +55,7 @@ class _PhotoScreenState extends State<PhotoScreen> {
     scrollController = ScrollController()
       ..addListener(() => _onScrollListener(context, scrollController));
 
-    _getPhotos(context);
+    _getPhotosByCategory(context);
 
   }
 
@@ -61,9 +63,15 @@ class _PhotoScreenState extends State<PhotoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: PreferredSize(
-            preferredSize: Size.fromHeight(kToolbarHeight),
-            child: HomeAppBar(title: "Photos",)),
+        appBar: AppBar(
+          backgroundColor: ColorPalettes.lightAccent,
+          systemOverlayStyle:
+          const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+          title: Text(
+            "${widget.arguments.category.categoryName}'s Photo",
+            style: const TextStyle(color: Colors.white),
+          ),
+        ),
         body: RefreshIndicator(
           onRefresh: _refresh,
           child: _buildBody(context),
@@ -82,11 +90,11 @@ class _PhotoScreenState extends State<PhotoScreen> {
       ScrollController scrollController) {
     final maxScroll = scrollController.position.maxScrollExtent;
     final currentScroll = scrollController.position.pixels;
-    final comicBloc = BlocProvider.of<GetPhotosBloc>(context);
+    final comicBloc = BlocProvider.of<GetPhotosByCategoryBloc>(context);
 
     if (currentScroll == maxScroll && hasMorePage) {
       ++page;
-      comicBloc.add(GetPhotos(page: page));
+      comicBloc.add(GetPhotosByCategory(page: page,categoryId: widget.arguments.category.id));
     }
   }
 
@@ -131,16 +139,16 @@ class _PhotoScreenState extends State<PhotoScreen> {
 
   Widget _buildLives(BuildContext context) {
 
-    return BlocBuilder<GetPhotosBloc, GetPhotosState>(
+    return BlocBuilder<GetPhotosByCategoryBloc, GetPhotosByCategoryState>(
         builder: (context, state) {
-          if (state is GetPhotosLoading) {
+          if (state is GetPhotosByCategoryLoading) {
             if (page != 1) {
               return _buildContent(context);
             }
             return const Center(
               child: CircularProgressIndicator(),
             );
-          } else if (state is GetPhotosHasData) {
+          } else if (state is GetPhotosByCategoryHasData) {
             _refreshCompleter.complete();
             _refreshCompleter = Completer();
             if (page == 1) {
@@ -151,7 +159,7 @@ class _PhotoScreenState extends State<PhotoScreen> {
             lists.addAll(state.result.list);
 
             return _buildContent(context);
-          } else if (state is GetPhotosNoData) {
+          } else if (state is GetPhotosByCategoryNoData) {
             _refreshCompleter.complete();
             _refreshCompleter = Completer();
             if (page != 1) {
@@ -160,7 +168,7 @@ class _PhotoScreenState extends State<PhotoScreen> {
             return NoDataWidget(
                 message: state.message
             );
-          } else if (state is GetPhotosNoInternetConnection) {
+          } else if (state is GetPhotosByCategoryNoInternetConnection) {
             _refreshCompleter.complete();
             _refreshCompleter = Completer();
             if (page != 1) {
@@ -168,9 +176,9 @@ class _PhotoScreenState extends State<PhotoScreen> {
             }
             return NoInternetWidget(
               message: AppConstant.noInternetConnection,
-              onPressed: () => _getPhotos(context),
+              onPressed: () => _getPhotosByCategory(context),
             );
-          } else if (state is GetPhotosError) {
+          } else if (state is GetPhotosByCategoryError) {
             _refreshCompleter.complete();
             _refreshCompleter = Completer();
             if (page != 1) {

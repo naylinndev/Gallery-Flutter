@@ -18,7 +18,7 @@ import '../../widget/error/error_widget.dart';
 import '../../widget/error/no_data_widget.dart';
 import '../../widget/error/no_internet_widget.dart';
 import '../../widget/card/card_category.dart';
-
+import '../../ui/photos_by_category/photo_by_category_screen.dart';
 class CategoryScreen extends StatefulWidget {
   static const routeName = '/category';
 
@@ -99,14 +99,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
             return CardCategory(
                 category: category,
                 onTap: () {
-                  // Navigation.pushScreen(
-                  //     context,
-                  //     DetailScreen(
-                  //         arguments: DetailArguments(
-                  //             content: "",
-                  //             videoLink: channel.link,
-                  //             title: channel.channelName,
-                  //             isLive: true)));
+                  Navigation.pushScreen(
+                      context,
+                      PhotoByCategoryScreen(
+                          arguments: CategoryDetailArgument(category)));
                 });
           }, childCount: lists.length),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

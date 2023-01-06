@@ -8,7 +8,10 @@ import '../bloc/get_category/get_category_bloc.dart';
 import '../di/injection_container.dart';
 import '../ui/home/home_screen.dart';
 import '../ui/category/category_screen.dart';
+import '../ui/photos_by_category/photo_by_category_screen.dart';
 import '../ui/splash/splash_screen.dart';
+import '../ui/detail/detail_screen.dart';
+import '../common/utils/argument.dart';
 import 'app_config.dart';
 
 class MyApp extends StatelessWidget {
@@ -40,6 +43,14 @@ class MyApp extends StatelessWidget {
         HomeScreen.routeName: (context) => HomeScreen(title: Config.title),
         PhotoScreen.routeName: (context) => const PhotoScreen(),
         CategoryScreen.routeName: (context) => const CategoryScreen(),
+        DetailScreen.routeName: (context) => DetailScreen(
+          arguments:
+          ModalRoute.of(context)?.settings.arguments as PhotoDetailArgument,
+        ),
+        PhotoByCategoryScreen.routeName: (context) => PhotoByCategoryScreen(
+          arguments:
+          ModalRoute.of(context)?.settings.arguments as CategoryDetailArgument,
+        ),
       },
     );
   }
