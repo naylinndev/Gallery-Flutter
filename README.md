@@ -1,16 +1,31 @@
-# gallery
+#Gallery Flutter
+I just want to show clean architecture and project structure for flutter.
 
-A new Flutter project.
+#Screenshot
+Photo            |  Category			|  Detail
+:-------------------------:|:-------------------------:|:-------------------------:
+![Photo Tab Screenshot](./screenshot/flutter_photo_screenshot.jpg)  |  ![Category Tab Screenshot](./screenshot/flutter_category_screenshot.jpg) |  ![Detail Screenshot](./screenshot/detail.jpg) 
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+#Backend Api
+I created admin portal and api to implement this project with **Laravel language**
 
-A few resources to get you started if this is your first Flutter project:
+You can check in [https://github.com/naylinndev/Gallery-Backend.git](https://github.com/naylinndev/Gallery-Backend.git).
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+**If you wanna try demo, you can check in [https://gallery.ntoon.app/](https://gallery.ntoon.app/)**
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+User Name - **naylinndev@gmail.com**
+
+Password - **Admin**
+
+#Author
+Nay Lin - @naylinndev on GitHub
+
+
+#Folder Structure
+Folder Structure            |  Library
+:-------------------------:|:-------------------------:
+![Folder Structure Screenshot](./screenshot/folder_structure.png)   |  ![Library Screenshot](./screenshot/library.png)
+
+
+
