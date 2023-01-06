@@ -16,8 +16,6 @@ class CardPhoto extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
-    var isDarkTheme = theme.appBarTheme.backgroundColor == null;
-    var width = Sizes.width(context) / 3 - 10;
     return Container(
       margin: const EdgeInsets.only(left: 5, right: 5, top: 5),
       child: GestureDetector(
@@ -28,78 +26,69 @@ class CardPhoto extends StatelessWidget {
               borderRadius: BorderRadius.circular(7),
             ),
             child: Container(
-              width: Sizes.width(context),
-              margin: EdgeInsets.all(4),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
+              child:
                   // Image
                   Stack(
-                    children: [
-                      Container(
-                        foregroundDecoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(
-                              Radius.circular(Sizes.dp5(context))),
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              ColorPalettes.black50,
-                              ColorPalettes.black50,
-                            ],
-                          ),
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.all(
-                              Radius.circular(Sizes.dp5(context))),
-                          child: CachedNetworkImage(
-                            imageUrl:
-                                photo.image,
-                            width: Sizes.width(context),
-                            fit: BoxFit.cover,
-                            placeholder: (context, url) =>
-                                LoadingHorizontalThumbnail(),
-                            errorWidget: (context, url, error) =>
-                                LoadingHorizontalThumbnail(),
-                          ),
-                        ),
-                      ),
-
-                    ],
-                  ),
-                  // Text and Rating
+                children: [
                   Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(
-                          Radius.circular(Sizes.dp10(context))),
+                    foregroundDecoration: BoxDecoration(
+                      borderRadius:
+                          BorderRadius.all(Radius.circular(Sizes.dp5(context))),
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          ColorPalettes.black50,
+                          ColorPalettes.black50,
+                        ],
+                      ),
                     ),
-                    padding: EdgeInsets.only(
-                        left: Sizes.dp6(context), bottom: Sizes.dp5(context)),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        const SizedBox(height: 10),
-                        Text(
-                          photo.title,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                          style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                              color: ColorPalettes.black),
-                        ),
-                        Text(
-                          photo.description,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                          style: TextStyle(
-                              fontSize: 11,
-                              color: ColorPalettes.secondaryColor),
-                        ),
-                        SizedBox(height: 5),
-                      ],
+                    child: ClipRRect(
+                      borderRadius:
+                          BorderRadius.all(Radius.circular(Sizes.dp5(context))),
+                      child: CachedNetworkImage(
+                        imageUrl: photo.image,
+                        width: Sizes.width(context),
+                        fit: BoxFit.cover,
+                        placeholder: (context, url) =>
+                            LoadingHorizontalThumbnail(),
+                        errorWidget: (context, url, error) =>
+                            LoadingHorizontalThumbnail(),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    left: 0,
+                    child: Container(
+                      alignment: Alignment.bottomRight,
+                      margin: EdgeInsets.all(5),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          Text(
+                            photo.title,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                            style: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w600,
+                                color: ColorPalettes.white),
+                          ),
+                          SizedBox(
+                            width: Sizes.width(context) - 10,
+                            child: Text(
+                              photo.description,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                              style: TextStyle(
+                                  fontSize: 13, color: ColorPalettes.white),
+                            ),
+                          ),
+                          SizedBox(height: 5),
+                        ],
+                      ),
                     ),
                   )
                 ],

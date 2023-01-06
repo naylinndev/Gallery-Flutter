@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gallery/ui/photo/photo_screen.dart';
+import 'package:gallery/ui/category/category_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -40,8 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Widget> _buildScreens() {
     List<Widget> screenArr = [];
     screenArr.add(const PhotoScreen());
-    screenArr.add(const PhotoScreen());
-    screenArr.add(const PhotoScreen());
+    screenArr.add(const CategoryScreen());
 
     return screenArr;
   }
@@ -58,13 +58,6 @@ class _HomeScreenState extends State<HomeScreen> {
     bottomNavArr.add(PersistentBottomNavBarItem(
       icon: const Icon(Icons.dashboard, size: 20),
       title: ("Category"),
-      activeColorPrimary: ColorPalettes.darkAccent,
-      inactiveColorPrimary: ColorPalettes.grey,
-    ));
-
-    bottomNavArr.add(PersistentBottomNavBarItem(
-      icon: const Icon(Icons.favorite, size: 20),
-      title: ("Favorites"),
       activeColorPrimary: ColorPalettes.darkAccent,
       inactiveColorPrimary: ColorPalettes.grey,
     ));

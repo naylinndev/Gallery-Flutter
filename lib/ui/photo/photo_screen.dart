@@ -26,9 +26,7 @@ class PhotoScreen extends StatefulWidget {
 }
 
 class _PhotoScreenState extends State<PhotoScreen> {
-  String keyword = "";
   int page = 1;
-  int genreSelectedIndex = 0;
   bool hasMorePage = false;
   late List<Photo> lists = [];
   late Completer<void> _refreshCompleter = Completer();
@@ -61,9 +59,9 @@ class _PhotoScreenState extends State<PhotoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const PreferredSize(
+        appBar: PreferredSize(
             preferredSize: Size.fromHeight(kToolbarHeight),
-            child: HomeAppBar()),
+            child: HomeAppBar(title: "Photos",)),
         body: RefreshIndicator(
           onRefresh: _refresh,
           child: _buildBody(context),

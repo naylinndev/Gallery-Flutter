@@ -12,7 +12,7 @@ abstract class ApiService {
   factory ApiService(Dio dio, {String baseUrl}) = _ApiService;
 
 
-  @POST('/api/v/get-photos')
+  @POST('/api/v1/get-photos')
   @FormUrlEncoded()
   Future<HttpResponse<ResultPhoto>> getPhotos(
       {@Field('app_secret') required String appSecret,

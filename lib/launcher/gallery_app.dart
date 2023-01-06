@@ -7,6 +7,7 @@ import 'package:gallery/ui/photo/photo_screen.dart';
 import '../bloc/get_category/get_category_bloc.dart';
 import '../di/injection_container.dart';
 import '../ui/home/home_screen.dart';
+import '../ui/category/category_screen.dart';
 import '../ui/splash/splash_screen.dart';
 import 'app_config.dart';
 
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
         SplashScreen.routeName: (context) => SplashScreen(),
         HomeScreen.routeName: (context) => HomeScreen(title: Config.title),
         PhotoScreen.routeName: (context) => const PhotoScreen(),
+        CategoryScreen.routeName: (context) => const CategoryScreen(),
       },
     );
   }

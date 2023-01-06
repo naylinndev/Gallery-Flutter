@@ -41,7 +41,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/api/v/get-photos',
+              '/api/v1/get-photos',
               queryParameters: queryParameters,
               data: _data,
             )

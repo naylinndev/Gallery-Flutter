@@ -17,20 +17,18 @@ class CardCategory extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     return Container(
-      margin: const EdgeInsets.only(left: 5, right: 5, top: 5),
+      margin: const EdgeInsets.only(left: 0, right: 0, top: 5),
       child: GestureDetector(
         onTap: onTap,
         child: Card(
-            elevation: 10,
+            elevation: 5,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(7),
             ),
             child: Container(
-              width: Sizes.width(context),
               child: Stack(
                 children: [
                   Container(
-                    height: 450,
                     foregroundDecoration: BoxDecoration(
                       borderRadius:
                       const BorderRadius.all(Radius.circular(7)),
@@ -47,7 +45,8 @@ class CardCategory extends StatelessWidget {
                       borderRadius: BorderRadius.all(Radius.circular(7)),
                       child: CachedNetworkImage(
                         imageUrl: category.categoryImage,
-                        width: Sizes.width(context),
+                        width: double.infinity,
+                        height: double.infinity,
                         fit: BoxFit.cover,
                         placeholder: (context, url) =>
                             LoadingHorizontalThumbnail(),
@@ -57,21 +56,18 @@ class CardCategory extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    height: 450,
                     child: Container(
-                      alignment: Alignment.bottomLeft,
-                      padding: EdgeInsets.only(left: 15, bottom: 10),
+                      alignment: Alignment.center,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          const SizedBox(height: 10),
                           Text(
                             category.categoryName,
                             overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
+                            maxLines: 3,
                             style: TextStyle(
-                                fontSize: 23,
+                                fontSize: 17,
                                 fontWeight: FontWeight.w900,
                                 color: ColorPalettes.white),
                           ),

@@ -10,13 +10,12 @@ class LoadingHorizontalThumbnail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
         child: ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(Sizes.dp5(context))),
-          child: Container(
-            color: ColorPalettes.grey,
-            padding: EdgeInsets.all(12),
-            child: Image.asset(ImagesAssets.horizontalThumbnailIcon,
-                fit: BoxFit.cover, width: Sizes.width(context)),
-          ),
-        ));
+      borderRadius: BorderRadius.all(Radius.circular(Sizes.dp5(context))),
+      child: Container(
+        color: ColorPalettes.grey,
+        child: Image.asset(ImagesAssets.horizontalThumbnailIcon,
+            fit: BoxFit.cover, width: Sizes.width(context)),
+      ),
+    ));
   }
 }

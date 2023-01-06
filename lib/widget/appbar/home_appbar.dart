@@ -5,19 +5,10 @@ import '../../common/styles/color_palettes.dart';
 import '../../common/utils/app_constant.dart';
 import '../../common/utils/image_assets.dart';
 
-class HomeAppBar extends StatefulWidget {
-  const HomeAppBar({Key? key}) : super(key: key);
+class HomeAppBar extends StatelessWidget {
+  final String title;
 
-  @override
-  _HomeAppBarState createState() => _HomeAppBarState();
-}
-
-class _HomeAppBarState extends State<HomeAppBar> {
-
-  @override
-  void initState() {
-    super.initState();
-  }
+  HomeAppBar({Key? key, required this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +17,9 @@ class _HomeAppBarState extends State<HomeAppBar> {
       shadowColor: Colors.white,
       systemOverlayStyle:
           const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
-      title: const Center(
+      title: Center(
         child: Text(
-          AppConstant.appName,
+          title,
           style: TextStyle(
             fontSize: 20,
           ),
